@@ -1,5 +1,6 @@
 package com.caresaas.caresaasmobiletask.feature.home.presentation
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +14,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -21,6 +23,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.navOptions
 import com.caresaas.caresaasmobiletask.R
 import com.caresaas.caresaasmobiletask.core.designsystem.theme.CareSaaSMobileTaskTheme
 import com.caresaas.caresaasmobiletask.core.presentation.util.shimmerEffect
@@ -29,22 +34,24 @@ import com.caresaas.caresaasmobiletask.feature.home.presentation.component.HomeA
 import com.caresaas.caresaasmobiletask.feature.home.presentation.component.HomeTabRow
 import com.caresaas.caresaasmobiletask.feature.home.presentation.component.HomeTopBar
 import com.caresaas.caresaasmobiletask.feature.home.presentation.component.MedicationTabContent
+import com.caresaas.caresaasmobiletask.navigation.Screen
 
 @Composable
 fun HomeRoute(
-    navigateToNotification: () -> Unit,
-    navigateToLogIn: () -> Unit,
-    modifier: Modifier = Modifier,
+    navController: NavHostController,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
+    val context = LocalContext.current
     val uiState by viewModel.state.collectAsStateWithLifecycle()
 
     HomeScreen(
         state = uiState,
-        modifier = modifier,
         onAction = viewModel::onAction,
-        navigateToNotification = navigateToNotification,
-        navigateToLogIn = navigateToLogIn,
+        navigateToNotification = {
+            Toast.makeText(context, "Notification action clicked", Toast.LENGTH_SHORT)
+                .show()
+        },
+        navigateToLogIn = { navController.navigateToLogin() },
     )
 }
 
@@ -153,6 +160,19 @@ fun HomeScreen(
         }
 
     }
+}
+
+private fun NavController.navigateToLogin() {
+    // Clear the entire backstack
+    val clearEntireBackStackNavOptions = navOptions {
+        popUpTo(graph.startDestinationRoute!!) {
+            inclusive = true
+        }
+    }
+    navigate(
+        Screen.Login.route,
+        clearEntireBackStackNavOptions
+    )
 }
 
 enum class HomeTab {

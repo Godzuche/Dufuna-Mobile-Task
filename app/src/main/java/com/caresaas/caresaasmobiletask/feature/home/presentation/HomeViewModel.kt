@@ -82,7 +82,10 @@ class HomeViewModel @Inject constructor(
                             e.response.body<BaseResponse>().message
                         }
 
-                        else -> e.processNetworkError()
+                        else -> {
+                            userPreferencesRepository.setIsSessionExpired(isSessionExpired = false)
+                            e.processNetworkError()
+                        }
                     }
 
                     println("Error: $message isSessionExpired: ${state.value.isSessionExpired}")

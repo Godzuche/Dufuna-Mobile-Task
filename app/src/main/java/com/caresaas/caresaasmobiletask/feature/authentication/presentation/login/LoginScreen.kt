@@ -24,9 +24,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -43,6 +40,9 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.navOptions
 import com.caresaas.caresaasmobiletask.R
 import com.caresaas.caresaasmobiletask.core.designsystem.component.CareSaasButton
 import com.caresaas.caresaasmobiletask.core.designsystem.component.CareSaasLoadingScreen
@@ -54,11 +54,11 @@ import com.caresaas.caresaasmobiletask.core.designsystem.theme.DisabledColor
 import com.caresaas.caresaasmobiletask.core.designsystem.theme.GreyDark
 import com.caresaas.caresaasmobiletask.core.designsystem.theme.RedMain
 import com.caresaas.caresaasmobiletask.core.presentation.util.removeLayoutWidthConstraint
+import com.caresaas.caresaasmobiletask.navigation.Screen
 
 @Composable
 fun LoginRoute(
-    navigateToHome: () -> Unit,
-    modifier: Modifier = Modifier,
+    navController: NavHostController,
     viewModel: LoginViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
@@ -67,13 +67,17 @@ fun LoginRoute(
     LoginScreen(
         state = state,
         onAction = viewModel::onAction,
-        modifier = modifier,
     )
 
     LaunchedEffect(key1 = state.isLoginSuccess) {
         if (state.isLoginSuccess) {
-            Toast.makeText(context, "Login Successful", Toast.LENGTH_SHORT).show()
-            navigateToHome()
+            Toast.makeText(
+                context,
+                context.getString(R.string.login_successful),
+                Toast.LENGTH_SHORT
+            ).show()
+            // Clear the entire backstack
+            navController.navigateToHome()
         }
     }
 }
@@ -84,13 +88,6 @@ fun LoginScreen(
     onAction: (LoginAction) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var isUsernameFieldFocused by remember {
-        mutableStateOf(false)
-    }
-    var isPasswordFieldFocused by remember {
-        mutableStateOf(false)
-    }
-
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -260,6 +257,15 @@ fun LoginScreen(
 
         }
     }
+}
+
+private fun NavController.navigateToHome() {
+    val clearEntireBackStackNavOptions = navOptions {
+        popUpTo(graph.startDestinationRoute!!) {
+            inclusive = true
+        }
+    }
+    navigate(Screen.Home.route, clearEntireBackStackNavOptions)
 }
 
 @Preview(

@@ -65,13 +65,10 @@ class MainActivity : ComponentActivity() {
                 is MainActivityUiState.Success -> {
                     CareSaaSMobileTaskTheme {
                         CareSaaSApp(
-                            startDestination = (uiState as MainActivityUiState.Success).run {
-                                if (data.isUserAuthenticated && data.isSessionExpired.not()) {
-                                    Screen.Home.route
-                                } else {
-                                    Screen.Login.route
-                                }
-                            }
+                            startDestination =
+                            if ((uiState as MainActivityUiState.Success).data.isUserAuthenticated) {
+                                Screen.Home.route
+                            } else Screen.Login.route
                         )
                     }
                 }
