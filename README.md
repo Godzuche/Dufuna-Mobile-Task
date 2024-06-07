@@ -9,7 +9,7 @@ This project is an assessment task for Dufuna, featuring a Login UI and Landing 
 - **Kotlin**: Programming language used for Android development.
 - **Proto Datastore**: A typed data for the application preferences.
 - **Ktor**: Framework for building asynchronous servers and clients in connected systems.
-- **MVI & Clean Architecture**: For maintainable and scalable codebase structure.
+- **Mix of MVVM & MVI with Clean Architecture**: For maintainable and scalable codebase structure.
 - **Kotlin Flows & Coroutines**: For asynchronous programming and data streams.
 - **Dagger Hilt**: Dependency injection framework.
 - **Coil**: Image loading library.
