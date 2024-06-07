@@ -16,7 +16,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.capitalize
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.caresaas.caresaasmobiletask.R
 import com.caresaas.caresaasmobiletask.core.designsystem.component.CareSaasButton
@@ -39,7 +42,8 @@ fun ActivitiesTabContent(
     ) {
         when (state) {
             is TasksUiState.Success -> {
-                if (state.tasks.isEmpty()) {
+                println("Activities Tasks: ${state.activitiesTasks}")
+                if (state.activitiesTasks.isEmpty()) {
                     item {
                         Box(
                             modifier = Modifier
@@ -48,15 +52,21 @@ fun ActivitiesTabContent(
                             contentAlignment = Alignment.Center,
                         ) {
                             Text(
-                                text = "You don't have any assigned tasks yet. :)\n" +
-                                        "Please check back later.",
+                                text = stringResource(R.string.you_don_t_have_any_assigned_tasks_yet_please_check_back_later),
                                 textAlign = TextAlign.Center,
                             )
                         }
                     }
                 } else {
-                    items(items = state.tasks) {
-                        TaskItem()
+                    items(items = state.activitiesTasks) {
+                        TaskItem(
+                            title = it.taskGroup?.capitalize(Locale.current) ?: "null",
+                            time = it.hourOfDay
+                                ?: it.timeOfDay?.capitalize(Locale.current)
+                                ?: "null",
+                            // Used action here because I had some questions for the design
+                            user = it.action ?: "null",
+                        )
                     }
                 }
             }

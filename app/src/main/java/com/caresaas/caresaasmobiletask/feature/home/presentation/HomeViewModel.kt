@@ -71,7 +71,18 @@ class HomeViewModel @Inject constructor(
                 tasksRepository.getAllAssignedTasks()
             },
             onSuccess = { tasks ->
-                updateState { it.copy(tasksUiState = TasksUiState.Success(tasks)) }
+                val medications =
+                    tasks.filter { it.taskType?.lowercase()?.contains("medication") == true }
+                val activities =
+                    tasks.filter { it.taskType?.lowercase()?.contains("medication")?.not() == true }
+                updateState {
+                    it.copy(
+                        tasksUiState = TasksUiState.Success(
+                            medicationTasks = medications,
+                            activitiesTasks = activities,
+                        )
+                    )
+                }
             },
             onError = { e ->
                 viewModelScope.launch {

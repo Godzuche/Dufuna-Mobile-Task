@@ -38,7 +38,12 @@ fun TaskShimmer(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun TaskItem(modifier: Modifier = Modifier) {
+fun TaskItem(
+    title: String,
+    time: String,
+    user: String,
+    modifier: Modifier = Modifier
+) {
     Card(
         onClick = {},
         shape = LocalCareSaasShapes.current.medium,
@@ -62,7 +67,7 @@ fun TaskItem(modifier: Modifier = Modifier) {
                 horizontalArrangement = Arrangement.spacedBy(4.dp),
             ) {
                 Text(
-                    text = "4 Medications to take",
+                    text = title,
                     color = BlackText,
                     style = MaterialTheme.typography.titleMedium,
                 )
@@ -85,7 +90,7 @@ fun TaskItem(modifier: Modifier = Modifier) {
                     tint = BlackText,
                 )
                 Text(
-                    text = "James",
+                    text = user,
                     color = BlackText,
                     style = MaterialTheme.typography.titleSmall,
                 )
@@ -121,15 +126,15 @@ fun TaskItem(modifier: Modifier = Modifier) {
                     style = MaterialTheme.typography.titleSmall,
                 )
                 Spacer(modifier = Modifier.weight(1f))
-                //
+                // Time
                 Icon(
                     painter = painterResource(CareSaaSIcons.Clock),
                     contentDescription = null,
                     tint = BlackText,
                 )
-                Spacer(modifier = Modifier.width(2.5.dp))
+//                Spacer(modifier = Modifier.width(2.5.dp))
                 Text(
-                    text = "09:00 AM",
+                    text = time,
                     color = BlackText,
                     style = MaterialTheme.typography.titleSmall,
                 )

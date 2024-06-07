@@ -13,8 +13,12 @@ data class HomeUiState(
     val isSessionExpired: Boolean = false,
 )
 
-sealed interface TasksUiState{
-    data class Success(val tasks: List<Task> = emptyList()): TasksUiState
-    data object Loading: TasksUiState
-    data class Error(val errorMessage: String? = null): TasksUiState
+sealed interface TasksUiState {
+    data class Success(
+        val medicationTasks: List<Task> = emptyList(),
+        val activitiesTasks: List<Task> = emptyList(),
+    ) : TasksUiState
+
+    data object Loading : TasksUiState
+    data class Error(val errorMessage: String? = null) : TasksUiState
 }

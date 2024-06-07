@@ -16,17 +16,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.capitalize
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.caresaas.caresaasmobiletask.R
 import com.caresaas.caresaasmobiletask.core.designsystem.component.CareSaasButton
 import com.caresaas.caresaasmobiletask.core.designsystem.theme.CareSaaSMobileTaskTheme
-import com.caresaas.caresaasmobiletask.core.designsystem.theme.LocalCareSaasShapes
 import com.caresaas.caresaasmobiletask.core.designsystem.theme.RedMain
-import com.caresaas.caresaasmobiletask.core.presentation.util.shimmerEffect
 import com.caresaas.caresaasmobiletask.feature.home.presentation.TasksUiState
 
 @Composable
@@ -45,7 +44,8 @@ fun MedicationTabContent(
     ) {
         when (state) {
             is TasksUiState.Success -> {
-                if (state.tasks.isEmpty()) {
+                println("Medication Tasks: ${state.medicationTasks}")
+                if (state.medicationTasks.isEmpty()) {
                     item {
                         Box(
                             modifier = Modifier
@@ -54,15 +54,21 @@ fun MedicationTabContent(
                             contentAlignment = Alignment.Center,
                         ) {
                             Text(
-                                text = "You don't have any assigned tasks yet. :)\n" +
-                                        "Please check back later.",
+                                text = stringResource(R.string.you_don_t_have_any_assigned_tasks_yet_please_check_back_later),
                                 textAlign = TextAlign.Center,
                             )
                         }
                     }
                 } else {
-                    items(items = state.tasks) {
-                        TaskItem()
+                    items(items = state.medicationTasks) {
+                        TaskItem(
+                            title = stringResource(R.string.medications_to_take, it.order ?: "null"),
+                            time = it.hourOfDay
+                                ?: it.timeOfDay?.lowercase()?.capitalize(Locale.current)
+                                ?: "null",
+                            // Used action here because I had some questions for the design
+                            user = it.action ?: "null",
+                        )
                     }
                 }
             }

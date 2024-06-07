@@ -187,14 +187,12 @@ fun LoginScreen(
                     checked = state.isRememberMeChecked,
                     onCheckedChange = { onAction(LoginAction.OnRememberMeCheckedChange(it)) },
                     modifier = Modifier.padding(start = 8.dp),
-                    colors = CheckboxDefaults.colors(
-                        uncheckedColor = Color(0xFFDBDFEA),
-                    )
+                    colors = CheckboxDefaults.colors(uncheckedColor = Color(0xFFDBDFEA)),
                 )
                 Text(
                     text = stringResource(R.string.remember_me),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = GreyDark
+                    color = GreyDark,
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Text(

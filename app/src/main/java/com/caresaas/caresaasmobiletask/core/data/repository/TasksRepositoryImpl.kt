@@ -50,7 +50,6 @@ class TasksRepositoryImpl @Inject constructor(
             }
 
             val careHomeId = input.substring(startIndex, endIndex)
-//            tryToExecute<TasksResponse> {
             client.get {
                 url {
                     appendPathSegments("tasks", shortCode, "careHome", careHomeId)
@@ -59,7 +58,6 @@ class TasksRepositoryImpl @Inject constructor(
                 contentType(ContentType.Application.Json)
                 headers { append("Authorization", "Bearer $token") }
             }.body<TasksResponse>()
-//            }
         }
 
         return result.data.map(TaskDto::toTask)
