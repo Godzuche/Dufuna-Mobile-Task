@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">CareSaaS Mobile Task</string>
+    <string name="account">Account</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="you_can_now_begin_your_task">You can now begin your task</string>
+    <string name="hi">Hi</string>
+    <string name="clocked_in">Clocked In</string>
+    <string name="clock_in_to_begin_your_task">Clock-in to begin your task</string>
+    <string name="sign_in">Sign in</string>
+    <string name="by_clicking_sign_in_above_you_agree_to_arocare_s">By clicking ‘Sign in’ above you agree to Arocare’s</string>
+    <string name="terms_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="privacy_policy">Privacy Policy.</string>
+    <string name="contact_support">Contact Support</string>
+    <string name="don_t_have_an_account">Don’t have an account?</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="medication">Medication</string>
+    <string name="activities">Activities</string>
+    <string name="clock_in">Clock-in</string>
+    <string name="clock_out">Clock-out</string>
+    <string name="take_a_break">Take a Break</string>
+    <string name="fill_your_details_to_get_started">Fill your details to get started</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="welcome_back">Welcome back!👋</string>
+    <string name="retry">Retry</string>
+</resources>
