@@ -259,7 +259,7 @@ fun LoginScreen(
 
 private fun NavController.navigateToHome() {
     val clearEntireBackStackNavOptions = navOptions {
-        popUpTo(graph.startDestinationRoute!!) {
+        popUpTo(Screen.Login.route) {
             inclusive = true
         }
     }

@@ -165,7 +165,7 @@ fun HomeScreen(
 private fun NavController.navigateToLogin() {
     // Clear the entire backstack
     val clearEntireBackStackNavOptions = navOptions {
-        popUpTo(graph.startDestinationRoute!!) {
+        popUpTo(Screen.Home.route) {
             inclusive = true
         }
     }
