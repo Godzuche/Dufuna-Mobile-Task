@@ -4,6 +4,12 @@
 
 This project is an assessment task for Dufuna, featuring a Login UI and Landing Page for the CareSaaS mobile application.
 
+<img alt="Splash Screen" width="200" src="https://github.com/Godzuche/Dufuna-Mobile-Task/assets/81016000/643305d8-90fb-4eb7-8c74-9447076560ba"/>
+<img alt="Login Screen" width="200" src="https://github.com/Godzuche/Dufuna-Mobile-Task/assets/81016000/b17e7bed-a874-4abf-9a96-5b007d159d1c"/>
+<img alt="Home Clocked Out" width="200" src="https://github.com/Godzuche/Dufuna-Mobile-Task/assets/81016000/55fdc46e-de20-4de5-8379-784cefeee86a"/>
+<img alt="Home Clocked In" width="200" src="https://github.com/Godzuche/Dufuna-Mobile-Task/assets/81016000/10253fb9-ee7a-4313-bcd9-f4b1700daa59"/>
+
+
 ## Tools and Libraries Used
 - **Jetpack Compose**: Modern toolkit for building native Android UI declaratively.
 - **Kotlin**: Programming language used for Android development.
