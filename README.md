@@ -10,6 +10,7 @@ This project is an assessment task for Dufuna, featuring a Login UI and Landing 
 <img alt="Home Clocked Out" width="200" src="https://github.com/Godzuche/Dufuna-Mobile-Task/assets/81016000/55fdc46e-de20-4de5-8379-784cefeee86a"/>
 <img alt="Home Clocked In" width="200" src="https://github.com/Godzuche/Dufuna-Mobile-Task/assets/81016000/10253fb9-ee7a-4313-bcd9-f4b1700daa59"/>
 <img alt="Home Error" width="200" src="https://github.com/Godzuche/Dufuna-Mobile-Task/assets/81016000/12719708-ac1d-4703-a929-9a295be15544"/>
+<img alt="Home Session Expired" width="200" src="https://github.com/Godzuche/Dufuna-Mobile-Task/assets/81016000/8f094b5f-51a6-4344-9c4a-baef315ba4a5"/>
 
 ## Tools and Libraries Used
 - **Jetpack Compose**: Modern toolkit for building native Android UI declaratively.
