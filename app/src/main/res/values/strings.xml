@@ -26,6 +26,11 @@
     <string name="welcome_back">Welcome back!👋</string>
     <string name="retry">Retry</string>
     <string name="login_successful">Login Successful</string>
-    <string name="medications_to_take">%1$s Medications to take</string>
     <string name="you_don_t_have_any_assigned_tasks_yet_please_check_back_later">You don\'t have any assigned tasks yet. :)\nPlease check back later.</string>
+    <string name="oops_an_error_occurred">Oops an error occurred! :(\n</string>
+
+    <plurals name="medications_to_take">
+        <item quantity="one">%1$d Medication to take</item>
+        <item quantity="other">%1$d Medications to take</item>
+    </plurals>
 </resources>

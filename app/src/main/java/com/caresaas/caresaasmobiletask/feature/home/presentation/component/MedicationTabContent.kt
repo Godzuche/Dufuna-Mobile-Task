@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.intl.Locale
@@ -60,14 +61,20 @@ fun MedicationTabContent(
                         }
                     }
                 } else {
-                    items(items = state.medicationTasks) {
+                    items(items = state.medicationTasks) { task ->
                         TaskItem(
-                            title = stringResource(R.string.medications_to_take, it.order ?: "null"),
-                            time = it.hourOfDay
-                                ?: it.timeOfDay?.lowercase()?.capitalize(Locale.current)
+                            title = task.order?.let {
+                                pluralStringResource(
+                                    R.plurals.medications_to_take,
+                                    it.toIntOrNull() ?: 1,
+                                    it.toIntOrNull() ?: 1,
+                                )
+                            } ?: "null",
+                            time = task.hourOfDay
+                                ?: task.timeOfDay?.lowercase()?.capitalize(Locale.current)
                                 ?: "null",
                             // Used action here because I had some questions for the design
-                            user = it.action ?: "null",
+                            user = task.action ?: "null",
                         )
                     }
                 }
@@ -92,8 +99,8 @@ fun MedicationTabContent(
                             verticalArrangement = Arrangement.spacedBy(10.dp),
                         ) {
                             Text(
-                                text = "Oops an error occurred! :(\n" +
-                                        "${state.errorMessage}",
+                                text = stringResource(R.string.oops_an_error_occurred) +
+                                        "\n${state.errorMessage}",
                                 textAlign = TextAlign.Center,
                                 color = RedMain,
                             )
