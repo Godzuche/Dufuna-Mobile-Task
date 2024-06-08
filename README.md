@@ -5,7 +5,7 @@
 This project is an assessment task for Dufuna, featuring a Login UI and Landing Page for the CareSaaS mobile application.
 
 ## Tools and Libraries Used
-- **Jetpack Compose**: Modern toolkit for building native Android UI.
+- **Jetpack Compose**: Modern toolkit for building native Android UI declaratively.
 - **Kotlin**: Programming language used for Android development.
 - **Proto Datastore**: A typed data for the application preferences.
 - **Ktor**: Framework for building asynchronous servers and clients in connected systems.
