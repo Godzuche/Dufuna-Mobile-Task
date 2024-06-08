@@ -6,9 +6,10 @@ This project is an assessment task for Dufuna, featuring a Login UI and Landing 
 
 <img alt="Splash Screen" width="200" src="https://github.com/Godzuche/Dufuna-Mobile-Task/assets/81016000/643305d8-90fb-4eb7-8c74-9447076560ba"/>
 <img alt="Login Screen" width="200" src="https://github.com/Godzuche/Dufuna-Mobile-Task/assets/81016000/b17e7bed-a874-4abf-9a96-5b007d159d1c"/>
+<img alt="Home Loading" width="200" src="https://github.com/Godzuche/Dufuna-Mobile-Task/assets/81016000/757e892e-06ae-4923-87e0-efba0e221811"/>
 <img alt="Home Clocked Out" width="200" src="https://github.com/Godzuche/Dufuna-Mobile-Task/assets/81016000/55fdc46e-de20-4de5-8379-784cefeee86a"/>
 <img alt="Home Clocked In" width="200" src="https://github.com/Godzuche/Dufuna-Mobile-Task/assets/81016000/10253fb9-ee7a-4313-bcd9-f4b1700daa59"/>
-
+<img alt="Home Error" width="200" src="https://github.com/Godzuche/Dufuna-Mobile-Task/assets/81016000/12719708-ac1d-4703-a929-9a295be15544"/>
 
 ## Tools and Libraries Used
 - **Jetpack Compose**: Modern toolkit for building native Android UI declaratively.
