@@ -25,7 +25,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
@@ -97,11 +96,11 @@ fun CareSaaSApp(
                     Box(
                         modifier = Modifier
                             .padding(horizontal = (oneQuarterWidthDp - indicatorWidth) / 2)
-                            .clip(RoundedCornerShape(2.dp))
-                            .offset {
-                                offset
-                            }
-                            .background(MaterialTheme.colorScheme.primary)
+                            .offset { offset }
+                            .background(
+                                color = MaterialTheme.colorScheme.primary,
+                                shape = RoundedCornerShape(2.dp),
+                            )
                             .width(indicatorWidth)
                             .height(3.dp)
                     )
