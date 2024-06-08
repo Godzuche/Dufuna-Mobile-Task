@@ -1,21 +1,36 @@
 package com.caresaas.caresaasmobiletask.ui
 
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.VisibilityThreshold
+import androidx.compose.animation.core.animateIntOffsetAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navOptions
 import com.caresaas.caresaasmobiletask.core.designsystem.component.BottomBar
@@ -40,6 +55,7 @@ fun CareSaaSApp(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination: NavDestination? = navBackStackEntry?.destination
 
+//    var moved by remember { mutableStateOf(false) }
     val selectedTabIndex: Int? = navBackStackEntry?.destination?.route?.let {
         when {
             it.contains(Screen.Home.route) -> 0
@@ -49,27 +65,63 @@ fun CareSaaSApp(
         }
     }
 
+    val density = LocalDensity.current
+    val configuration = LocalConfiguration.current
+    val screenWidthDp = configuration.screenWidthDp.dp
+    val screenWidthPx = with(density) { screenWidthDp.roundToPx() }
+    val oneQuarterWidthPx = screenWidthPx / 3
+    val oneQuarterWidthDp = screenWidthDp / 3
+    val indicatorWidth = 45.dp
+
     Scaffold(
         modifier = Modifier,
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         bottomBar = {
             val visibility = currentDestination.shouldShowBottomBar()
             if (visibility.isTrue()) {
-                BottomBar(
-                    modifier = Modifier.fillMaxWidth(),
-                    tabs = bottomBarDestinations,
-                    currentDestination = currentDestination,
-                    onItemClick = {
-                        val navOptions = navOptions {
-                            popUpTo(Screen.Home.route) {
-                                saveState = true
+                Column {
+                    val offset by animateIntOffsetAsState(
+                        targetValue = when (selectedTabIndex) {
+                            1 -> IntOffset(oneQuarterWidthPx * selectedTabIndex, 0)
+                            2 -> IntOffset(oneQuarterWidthPx * selectedTabIndex, 0)
+                            else -> IntOffset.Zero
+                        },
+                        label = "offset",
+                        animationSpec = spring(
+                            dampingRatio = Spring.DampingRatioHighBouncy,
+                            stiffness = Spring.StiffnessLow,
+                            visibilityThreshold = IntOffset.VisibilityThreshold,
+                        )
+                    )
+
+                    Box(
+                        modifier = Modifier
+                            .padding(horizontal = (oneQuarterWidthDp - indicatorWidth) / 2)
+                            .clip(RoundedCornerShape(2.dp))
+                            .offset {
+                                offset
                             }
-                            launchSingleTop = true
-                            restoreState = true
-                        }
-                        navController.navigate(it.screen.route, navOptions)
-                    },
-                )
+                            .background(MaterialTheme.colorScheme.primary)
+                            .width(indicatorWidth)
+                            .height(3.dp)
+                    )
+
+                    BottomBar(
+                        modifier = Modifier.fillMaxWidth(),
+                        tabs = bottomBarDestinations,
+                        currentDestination = currentDestination,
+                        onItemClick = {
+                            val navOptions = navOptions {
+                                popUpTo(Screen.Home.route) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                            navController.navigate(it.screen.route, navOptions)
+                        },
+                    )
+                }
             }
         },
     ) { padding ->
