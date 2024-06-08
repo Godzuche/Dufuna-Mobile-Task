@@ -40,12 +40,6 @@ import com.caresaas.caresaasmobiletask.navigation.CareSaaSNavHost
 import com.caresaas.caresaasmobiletask.navigation.Screen
 import com.caresaas.caresaasmobiletask.navigation.bottomBarDestinations
 
-enum class BottomTab {
-    HOME,
-    SEARCH,
-    ACCOUNT,
-}
-
 @Composable
 fun CareSaaSApp(
     startDestination: String,
@@ -54,7 +48,6 @@ fun CareSaaSApp(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination: NavDestination? = navBackStackEntry?.destination
 
-//    var moved by remember { mutableStateOf(false) }
     val selectedTabIndex: Int? = navBackStackEntry?.destination?.route?.let {
         when {
             it.contains(Screen.Home.route) -> 0
@@ -72,6 +65,20 @@ fun CareSaaSApp(
     val oneQuarterWidthDp = screenWidthDp / 3
     val indicatorWidth = 45.dp
 
+    val offset by animateIntOffsetAsState(
+        targetValue = when (selectedTabIndex) {
+            1 -> IntOffset(oneQuarterWidthPx * selectedTabIndex, 0)
+            2 -> IntOffset(oneQuarterWidthPx * selectedTabIndex, 0)
+            else -> IntOffset.Zero
+        },
+        label = "offset",
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioHighBouncy,
+            stiffness = Spring.StiffnessLow,
+            visibilityThreshold = IntOffset.VisibilityThreshold,
+        )
+    )
+
     Scaffold(
         modifier = Modifier,
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
@@ -79,20 +86,6 @@ fun CareSaaSApp(
             val visibility = currentDestination.shouldShowBottomBar()
             if (visibility.isTrue()) {
                 Column {
-                    val offset by animateIntOffsetAsState(
-                        targetValue = when (selectedTabIndex) {
-                            1 -> IntOffset(oneQuarterWidthPx * selectedTabIndex, 0)
-                            2 -> IntOffset(oneQuarterWidthPx * selectedTabIndex, 0)
-                            else -> IntOffset.Zero
-                        },
-                        label = "offset",
-                        animationSpec = spring(
-                            dampingRatio = Spring.DampingRatioHighBouncy,
-                            stiffness = Spring.StiffnessLow,
-                            visibilityThreshold = IntOffset.VisibilityThreshold,
-                        )
-                    )
-
                     Box(
                         modifier = Modifier
                             .padding(horizontal = (oneQuarterWidthDp - indicatorWidth) / 2)

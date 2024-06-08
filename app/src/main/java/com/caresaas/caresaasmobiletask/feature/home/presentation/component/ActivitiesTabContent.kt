@@ -90,7 +90,7 @@ fun ActivitiesTabContent(
                             verticalArrangement = Arrangement.spacedBy(10.dp),
                         ) {
                             Text(
-                                text = "Oops an error occurred! :(\n" +
+                                text = stringResource(R.string.oops_an_error_occurred) +
                                         "${state.errorMessage}",
                                 textAlign = TextAlign.Center,
                                 color = RedMain,

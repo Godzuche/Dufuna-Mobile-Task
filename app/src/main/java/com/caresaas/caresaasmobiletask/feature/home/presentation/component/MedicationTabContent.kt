@@ -100,7 +100,7 @@ fun MedicationTabContent(
                         ) {
                             Text(
                                 text = stringResource(R.string.oops_an_error_occurred) +
-                                        "\n${state.errorMessage}",
+                                        "${state.errorMessage}",
                                 textAlign = TextAlign.Center,
                                 color = RedMain,
                             )
